@@ -11,41 +11,41 @@ public class Binomial {
 	}
 
 	// Computes the Binomial function, basic version.
-	public static int binomial1(int n, int k) { 
-		if (k > n) return 0;
-		if (k == 0 || n == 0) return 1;
+	public static Long binomial1(int n, int k) { 
+		if (k > n) return 0L;
+		if (k == 0 || n == 0) return 1L;
 		return binomial1(n - 1, k) + binomial1(n - 1, k - 1);	
 	}
 	
 	// Computes the Binomial function, efficiently
-	public static int binomial(int n, int k) {
+	public static Long binomial(int n, int k) {
 		//// This function creates a 2D array, say memo, 
 		//// and then initializes all its elements to -1.
 		//// It then calls binomial(n, k, memo), which does all the heavy lifiting.
 		
-		int[][] memo = new int [n + 1][k + 1];
+		Long[][] memo = new Long[n + 1][k + 1];
 
 		for (int i = 0; i <= n; i++){
 			for (int j = 0; j <= k; j++){
-				memo[i][j] = -1;
+				memo[i][j] = -1L;
 			}
 		}
 		return binomial(n, k, memo);
 	}
 
-	private static int binomial(int n, int k, int[][] memo) {
-		if (memo[n][k] != -1) {
+	private static Long binomial(int n, int k, Long[][] memo) {
+		if (memo[n][k] != -1L) {
 			return memo[n][k];
 		}
 		// Base case
 		if ((k > n)) {
-		   	memo[n][k] = 0; 
-		   	return 0;
+		   	memo[n][k] = 0L; 
+		   	return 0L;
 		}
 		// Another base case
 		if (n == 0 || k == 0) {
-		   	memo[n][k] = 1; 
-		   	return 1;
+		   	memo[n][k] = 1L; 
+		   	return 1L;
 		}
 		memo[n][k] = binomial(n - 1, k, memo) + binomial(n - 1, k - 1, memo);
 		return memo[n][k];
